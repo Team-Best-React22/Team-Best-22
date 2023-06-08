@@ -1,12 +1,10 @@
-import { addDoc } from "firebase/firestore";
-import { todosRef } from "./firebase";
+import { addDoc, deleteDoc, doc } from "firebase/firestore";
+import { database, todosRef } from "./firebase";
 
 const titleInput = document.getElementById("title-input");
 const descriptionInput = document.getElementById("description-input");
 const endDateInput = document.getElementById("end-date-input");
 const createTodoButton = document.getElementById("create-todo");
-
-function todoFunction() {}
 
 async function createTodo(e) {
   e.preventDefault();
@@ -19,3 +17,10 @@ async function createTodo(e) {
 }
 
 createTodoButton.addEventListener("click", createTodo);
+
+
+async function removeTodo() {
+  const document = await deleteDoc(doc(database,'todos','K9bTb7RHXoxjCQY5z7yV'));
+}
+
+removeTodo();
