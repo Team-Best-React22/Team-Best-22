@@ -9,30 +9,27 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Best App</title>
+    <script type="module" defer src="main.js"></script>
+    <script type="module" defer src="todo.js"></script>
   </head>
   <body>
-
     <header id="headerContainer">
       <h1>Bagar-Bosse</h1>
     </header>
 
     <aside id="asideContainer">
       <label for="title-input">Att göra</label>
-      <input id="title-input" type="text">
+      <input id="title-input" type="text" />
 
       <label for="description-input">Beskrivning</label>
-      <input id="description-input" type="text">
+      <input id="description-input" type="text" />
 
       <label for="end-date-input">Slutdatum</label>
-      <input id="end-date-input" type="text">
+      <input id="end-date-input" type="date" />
 
       <button id="create-todo">Skapa todo</button>
     </aside>
 
-    <section id="mainContainer">
-
-    </section>
-
-    <script type="module" src="/main.js"></script>
+    <section id="mainContainer"></section>
   </body>
 </html>
