@@ -13,6 +13,7 @@ getDocs(sortQuery).then((snapshot) => {
 
   todos.map((todo) => {
     const todoDiv = document.createElement("div");
+    todoDiv.id = todo.id;
     todoDiv.className = "todo-wrapper";
     const title = document.createElement("h3");
     title.className = "todo-title";
