@@ -19,7 +19,7 @@ async function createTodo(e) {
     Date: endDateInput.value,
   });
   alert(`added doc ${doc.id}`);
-  // printTodos();
+  printTodos();
 }
 
 createTodoButton.addEventListener("click", createTodo);
@@ -28,5 +28,5 @@ export async function removeTodo(e) {
   e.preventDefault();
   console.log(e.target.parentElement.id);
   const document = await deleteDoc(doc(database,'todos',e.target.parentNode.id));
-  // printTodos();
+  printTodos();
 }
