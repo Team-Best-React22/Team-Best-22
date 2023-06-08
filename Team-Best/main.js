@@ -4,13 +4,17 @@ import xicon from "./x-icon.svg";
 import { getDocs } from "firebase/firestore";
 import { sortQuery, todosRef } from "./firebase";
 import moment from "moment/moment";
+import { removeTodo } from "./todo";
+
 const section = document.getElementById("mainContainer");
-getDocs(sortQuery).then((snapshot) => {
+
+export function printTodos() {
+  getDocs(sortQuery).then((snapshot) => {
   let todos = [];
   snapshot.docs.forEach((doc) => {
     todos.push({ ...doc.data(), id: doc.id });
   });
-
+  section.innerHTML = "";
   todos.map((todo) => {
     const todoDiv = document.createElement("div");
     todoDiv.id = todo.id;
@@ -36,6 +40,7 @@ getDocs(sortQuery).then((snapshot) => {
     svgIcon.setAttribute("viewbox", "0 0 24 24");
     svgIcon.setAttribute("stroke", "currentColor");
     svgIcon.setAttribute("stroke-width", "1.5");
+    svgIcon.setAttribute("id", todo.id);
     svgPath.setAttribute(
       "d",
       "M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
@@ -44,6 +49,7 @@ getDocs(sortQuery).then((snapshot) => {
     svgPath.setAttribute("stroke-linejoin", "round");
     svgPath.setAttribute("stroke-width", "2");
     svgIcon.appendChild(svgPath);
+    svgIcon.addEventListener('click', removeTodo);
     title.textContent = todo.Title;
     description.textContent = todo.Description;
 
@@ -56,3 +62,6 @@ getDocs(sortQuery).then((snapshot) => {
     section.appendChild(todoDiv);
   });
 });
+}
+
+printTodos();
