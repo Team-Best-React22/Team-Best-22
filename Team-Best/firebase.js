@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection } from "firebase/firestore";
+import { getFirestore, collection, query, orderBy } from "firebase/firestore";
 export const firebaseConfig = {
   apiKey: "AIzaSyAccE4Vn7dI2N-lBpK6UmoCWJBIxCLg8Gc",
   authDomain: "team-best.firebaseapp.com",
@@ -12,3 +12,4 @@ export const app = initializeApp(firebaseConfig);
 
 export const database = getFirestore();
 export const todosRef = collection(database, "todos");
+export const sortQuery = query(todosRef, orderBy("Date"));
