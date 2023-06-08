@@ -64,11 +64,12 @@ input{
 }
 #mainContainer{
   display: grid;
-  grid-template-columns: 450px 450px;
+  grid-template-columns: 450px 450px 450px;
   margin-right: 75;
 }
 .todo-wrapper{
   display: grid;
+  grid-template-columns: 320px 80px;
   margin-right: 50px;
   margin-top: 20px;
   height: 300px;
@@ -76,6 +77,31 @@ input{
 }
 .todo-title{
   background-color: rgb(54,54,54);
+  width: 400px;
   color: white;
   height: 50px;
+}
+.todo-icon{
+  margin-left: 50px;
+  color: #FFFFFF;
+  grid-row-start: 1;
+  grid-column: 2;
+  height: 50px;
+}
+.todo-date{
+   grid-row-start: 5;
+}
+h3{
+padding: 10px;
+}
+p{
+padding:10px;
+}
+.todo-date{
+grid-column: 2;
+}
+.todo-description{
+grid-column: 1;
+grid-row-start: 2;
+grid-row-end: 4;
 }
