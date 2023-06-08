@@ -4,13 +4,17 @@ import xicon from "./x-icon.svg";
 import { getDocs } from "firebase/firestore";
 import { sortQuery, todosRef } from "./firebase";
 import moment from "moment/moment";
+import { removeTodo } from "./todo";
+
 const section = document.getElementById("mainContainer");
-getDocs(sortQuery).then((snapshot) => {
+
+export function printTodos() {
+  getDocs(sortQuery).then((snapshot) => {
   let todos = [];
   snapshot.docs.forEach((doc) => {
     todos.push({ ...doc.data(), id: doc.id });
   });
-
+  section.innerHTML = "";
   todos.map((todo) => {
     const todoDiv = document.createElement("div");
     todoDiv.id = todo.id;
@@ -44,6 +48,7 @@ getDocs(sortQuery).then((snapshot) => {
     svgPath.setAttribute("stroke-linejoin", "round");
     svgPath.setAttribute("stroke-width", "2");
     svgIcon.appendChild(svgPath);
+    svgIcon.addEventListener('click', removeTodo);
     title.textContent = todo.Title;
     description.textContent = todo.Description;
 
@@ -56,3 +61,6 @@ getDocs(sortQuery).then((snapshot) => {
     section.appendChild(todoDiv);
   });
 });
+}
+
+printTodos();
