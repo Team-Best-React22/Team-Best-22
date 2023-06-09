@@ -35,6 +35,7 @@ export function printTodos() {
       const editDate = document.createElement("input")
       editDate.setAttribute("type", "date")
       editDate.setAttribute("class", "edit-date")
+      editDate.style.display = "none"
 
       const confirmBtn = document.createElement("button")
       confirmBtn.style.display = "none"
@@ -66,6 +67,7 @@ export function printTodos() {
       svgPath.setAttribute("stroke-linejoin", "round")
       svgPath.setAttribute("stroke-width", "2")
       svgIcon.appendChild(svgPath)
+
       svgIcon.addEventListener("click", removeTodo)
       title.textContent = todo.Title
       description.textContent = todo.Description
@@ -86,8 +88,17 @@ export function printTodos() {
           : (confirmBtn.style.display = "block")
       })
 
+      date.addEventListener("click", () => {
+        toggle()
+        toggler
+          ? (confirmBtn.style.display = "none") &&
+            (editDate.style.display = "none")
+          : (confirmBtn.style.display = "block") &&
+            (editDate.style.display = "block")
+      })
+
       confirmBtn.addEventListener("click", (e) =>
-        editTodo(e, title.innerText, description.innerText)
+        editTodo(e, title.innerText, description.innerText, editDate.value)
       )
 
       todoDiv.appendChild(title)

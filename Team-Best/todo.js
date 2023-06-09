@@ -11,14 +11,23 @@ const todoIcon = document.getElementsByClassName("todo-icon")
 const section = document.getElementById("mainContainer")
 
 async function createTodo(e) {
-  // section.innerHTML = "";
   e.preventDefault()
+  let date = endDateInput.value
+
+  if (date === "") {
+    date = moment([]).toString()
+  }
+
+  if (titleInput.value === "" || descriptionInput.value === "") {
+    return alert("Fyll i alla fält!")
+  }
+
   const doc = await addDoc(todosRef, {
     Title: titleInput.value,
     Description: descriptionInput.value,
-    Date: endDateInput.value,
+    Date: date,
   })
-  alert(`added doc ${doc.id}`)
+  alert(`Datan tillagd med id: ${doc.id}`)
   printTodos()
 }
 
@@ -26,22 +35,29 @@ createTodoButton.addEventListener("click", createTodo)
 
 export async function removeTodo(e) {
   e.preventDefault()
-  console.log(e.target.parentElement.id)
   const document = await deleteDoc(
     doc(database, "todos", e.target.parentNode.id)
   )
   printTodos()
 }
 
-export async function editTodo(e, title, description) {
+export async function editTodo(e, title, description, date) {
   e.preventDefault()
-  console.log(title, description)
-  console.log(e.target)
+
+  if (date === "") {
+    date = moment([]).toString()
+  }
+
+  if (title === "" || description === "") {
+    return alert("Kan inte spara utan rubrik och brödtext")
+  }
+
   const document = await setDoc(
     doc(database, "todos", e.target.parentNode.id),
     {
       Title: title,
       Description: description,
+      Date: date,
     },
     { merge: true }
   )
