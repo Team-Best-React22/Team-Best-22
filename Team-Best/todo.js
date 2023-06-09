@@ -10,6 +10,7 @@ const createTodoButton = document.getElementById("create-todo")
 const todoIcon = document.getElementsByClassName("todo-icon")
 const section = document.getElementById("mainContainer")
 
+
 async function createTodo(e) {
   e.preventDefault()
   let date = endDateInput.value
@@ -26,6 +27,7 @@ async function createTodo(e) {
     Title: titleInput.value,
     Description: descriptionInput.value,
     Date: date,
+    Done: false,
   })
   alert(`Datan tillagd med id: ${doc.id}`)
   printTodos()
@@ -62,4 +64,17 @@ export async function editTodo(e, title, description, date) {
     { merge: true }
   )
   printTodos()
+}
+
+export async function checkedTodo(e, done) {
+  e.preventDefault()
+  
+  const document = await setDoc(
+    doc(database, "todos", e.target.parentNode.id), 
+    {
+      Done: !done,
+    },
+    { merge: true }
+  )
+  printTodos();
 }
